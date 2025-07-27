@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +37,7 @@ class RegisterController extends Controller
             return redirect()->route('register')->withErrors(['image' => 'File tidak ditemukan']);
         }
 
+        
         if ($validator->passes()){
             
             $user = new User();
@@ -45,6 +47,7 @@ class RegisterController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
+            event(new Registered($user)); 
             return redirect()->route('login')->with('Success', 'Register Berhasil');
 
         }else{
