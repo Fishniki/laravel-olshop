@@ -16,13 +16,17 @@ use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PesananController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return view('welcome');
+})->middleware('verified');
+
 
 // untuk user register dan login
 Route::group(['middleware' => 'guest'], function () {
@@ -37,17 +41,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('user-dashboard');
     Route::get('/logout', [LoginUserController::class, 'logout'])->name('logout');
 
-    Route::get('/email/verify', function () {
-        return view('auth.verify-email');
-    })->middleware('auth')->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
     
-        return redirect('/login');
-    })->middleware(['auth', 'signed'])->name('verification.verify');
-
 });
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 
 
 //sama saja namun hanya untuk admin
