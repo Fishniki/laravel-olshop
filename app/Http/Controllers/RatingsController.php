@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +25,14 @@ class RatingsController extends Controller
                 ->withErrors($validator);
         }
 
+
         if ($request->hasFile('image')) {
             $item_image = $request->file('image')->store('ratings-image', 'public');
         } else {
             return redirect()->route('pesanan.finished')->withErrors(['image' => 'File tidak ditemukan']);
         }
+
+        
 
         $ratings = new Rating();
         $ratings->user_id = Auth::id();
@@ -37,6 +41,15 @@ class RatingsController extends Controller
         $ratings->comment = $request->ulasan;
         $ratings->image = $item_image;
         $ratings->save();
+
+        //Mengupdate status pada colom order
+        $order = Order::where('user_id', Auth::id())
+        ->first();
+        // dd($order);
+        if ($order){
+            $order->status = 'Ratings';
+            $order->save();
+        }
 
         return redirect()->route('pesanan.finished')->with('Success', 'Rating Berhasil Ditambahkan');
     }

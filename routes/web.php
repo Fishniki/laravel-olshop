@@ -95,6 +95,7 @@ Route::get('/pesanan', [PesananController::class, 'unpaid'])->name('pesanan');
 Route::get('/pesanan/paid', [PesananController::class, 'paid'])->name('pesanan.paid');
 Route::get('/pesanan/delivered', [PesananController::class, 'delivered'])->name('pesanan.delivered');
 Route::get('/pesanan/finished', [PesananController::class, 'finished'])->name('pesanan.finished');
+Route::get('/pesanan/ratings', [PesananController::class, 'penilaian'])->name('pesanan.ratings');
 
 Route::post('/chekout/payment', [OrderController::class, 'chekoutPayment'])->name('chekout.payment');
 

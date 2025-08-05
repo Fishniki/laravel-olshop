@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Pakaian;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Auth;
 
 class PesananController extends Controller
@@ -45,15 +46,21 @@ class PesananController extends Controller
     }
 
     public function finished()
-{
-    $finished = Order::where('user_id', Auth::id())->where('status', 'Finished')->get();
+    {
+        $finished = Order::where('user_id', Auth::id())->where('status', 'Finished')->get();
 
-    $finished->map(function ($pesanan) {
-        $pakaianIds = json_decode($pesanan->pakaian_id, true);
-        $pesanan->pakaians = Pakaian::whereIn('id', $pakaianIds)->get();
-    });
+        $finished->map(function ($pesanan) {
+            $pakaianIds = json_decode($pesanan->pakaian_id, true);
+            $pesanan->pakaians = Pakaian::whereIn('id', $pakaianIds)->get();
+        });
 
-    return view('user.pesanan.finish', compact('finished'));
-}
+        return view('user.pesanan.finish', compact('finished'));
+    }
 
+    public function penilaian()
+    {
+        $penilaian = Rating::where('user_id', Auth::id())->get();
+        // dd($penilaian);
+        return view('user.pesanan.penilaian', compact('penilaian'));
+    }
 }

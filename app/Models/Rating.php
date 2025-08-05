@@ -10,4 +10,9 @@ class Rating extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function pakaian()
+    {
+        return $this->belongsTo(Pakaian::class);
+    }
 }
