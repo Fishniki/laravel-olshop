@@ -22,48 +22,48 @@ class PakaianController extends Controller
     }
 
     public function save(Request $request)
-{
-    // Validasi input
-    $validator = Validator::make($request->all(), [
-        'nama' => 'required',
-        'harga' => 'required|integer',
-        'stok' => 'required|integer',
-        'kategori' => 'required|string',
-        'bobot' => 'required|string',
-        'sent_from' => 'required|string',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'deskripsi' => 'required|string'
-    ]);
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'harga' => 'required|integer',
+            'stok' => 'required|integer',
+            'kategori' => 'required|string',
+            'bobot' => 'required|string',
+            'sent_from' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'deskripsi' => 'required|string'
+        ]);
 
-    // Jika validasi gagal, kembalikan error
-    if ($validator->fails()) {
-        return redirect()->route('create-pakaian')
-            ->withInput()
-            ->withErrors($validator);
+        // Jika validasi gagal, kembalikan error
+        if ($validator->fails()) {
+            return redirect()->route('create-pakaian')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        // Proses upload file jika ada
+        if ($request->hasFile('image')) {
+            $item_image = $request->file('image')->store('items-image', 'public');
+        } else {
+            return redirect()->route('create-pakaian')->withErrors(['image' => 'File tidak ditemukan']);
+        }
+
+        // Simpan data ke database
+        $pakaian = new Pakaian();
+        $pakaian->nama = $request->nama;
+        $pakaian->harga = $request->harga;
+        $pakaian->stok = $request->stok;
+        $pakaian->kategori = $request->kategori;
+        $pakaian->bobot = $request->bobot;
+        $pakaian->sent_from = $request->sent_from;
+        $pakaian->deskripsi = $request->deskripsi;
+        $pakaian->author = Auth::guard('admin')->user()->name;
+        $pakaian->image = $item_image; // Path untuk ditampilkan di front-end
+        $pakaian->save();
+
+        return redirect()->route('table-produk')->with('success', 'Pakaian Berhasil Ditambahkan');
     }
-
-    // Proses upload file jika ada
-    if ($request->hasFile('image')) {
-        $item_image = $request->file('image')->store('items-image', 'public');
-    } else {
-        return redirect()->route('create-pakaian')->withErrors(['image' => 'File tidak ditemukan']);
-    }
-
-    // Simpan data ke database
-    $pakaian = new Pakaian();
-    $pakaian->nama = $request->nama;
-    $pakaian->harga = $request->harga;
-    $pakaian->stok = $request->stok;
-    $pakaian->kategori = $request->kategori;
-    $pakaian->bobot = $request->bobot;
-    $pakaian->sent_from = $request->sent_from;
-    $pakaian->deskripsi = $request->deskripsi;
-    $pakaian->author = Auth::guard('admin')->user()->name;
-    $pakaian->image = $item_image; // Path untuk ditampilkan di front-end
-    $pakaian->save();
-
-    return redirect()->route('table-produk')->with('success', 'Pakaian Berhasil Ditambahkan');
-}
 
 
 

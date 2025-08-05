@@ -52,7 +52,7 @@
                                 class="mt-3 p-4 border rounded-lg bg-white shadow-inner"
                                 @click.outside="openRating = false" x-data="{ selected: 0, imagePreview: null }">
 
-                                <form action="#" method="POST" enctype="multipart/form-data" class="space-y-4">
+                                <form action="{{ route('tambah.ratings') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                                     @csrf
                                     <input type="hidden" name="pakaian_id" value="{{ $pakaian->id }}">
                                     {{-- <input type="hidden" name="pesanan_id" value="{{ $item->id }}"> --}}

@@ -15,6 +15,7 @@ use App\Http\Controllers\ChekoutController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\RatingsController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -41,17 +42,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('user-dashboard');
     Route::get('/logout', [LoginUserController::class, 'logout'])->name('logout');
 
-    
 });
 
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
 
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
 //sama saja namun hanya untuk admin
@@ -100,6 +100,9 @@ Route::post('/chekout/payment', [OrderController::class, 'chekoutPayment'])->nam
 
 
 Route::get('/detail/produk/{id}', [DetailProdukController::class, 'index'])->name('detail-produk');
+
+//Route untuk ratings
+Route::post('/ratings/tambah', [RatingsController::class, 'ratings'])->name('tambah.ratings');
 
 
 
