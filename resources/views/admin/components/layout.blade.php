@@ -9,6 +9,7 @@
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
+    @vite('resources/js/preview-image.js')
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen">

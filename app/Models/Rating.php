@@ -13,6 +13,6 @@ class Rating extends Model
 
     public function pakaian()
     {
-        return $this->belongsTo(Pakaian::class);
+        return $this->belongsTo(Pakaian::class, 'product_id');
     }
 }

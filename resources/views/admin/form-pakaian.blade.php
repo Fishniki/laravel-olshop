@@ -39,7 +39,7 @@
         
                         {{-- Harga --}}
                         <div>
-                            <label for="harga" class="block text-sm font-medium text-gray-900">Harga:</label>
+                            <label for="harga" class="block text-sm font-medium text-gray-900">Harga Rp:</label>
                             <div class="mt-2">
                                 <input type="number" name="harga" id="harga" required
                                     class="block w-full rounded-md border border-black bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm @error('harga') is-invalid @enderror">
@@ -105,22 +105,8 @@
                                     @enderror
                                 </div>
                             </div>
+
                         </div>
-                    </div>
-        
-                    <div class="space-y-4">
-                        {{-- Gambar --}}
-                        <div>
-                            <label for="image" class="block text-sm font-medium text-gray-900">Image:</label>
-                            <div class="mt-2">
-                                <input type="file" name="image" id="image" required
-                                    class="block w-full rounded-md border border-black bg-white px-3 py-1.5 text-base text-gray-900 focus:outline-indigo-600 sm:text-sm @error('image') is-invalid @enderror">
-                                @error('image')
-                                    <p class="invalid-feedback text-red-600 text-sm">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-        
                         {{-- Deskripsi --}}
                         <div>
                             <label for="deskripsi" class="block text-sm font-medium text-gray-900">Deskripsi Barang:</label>
@@ -132,6 +118,29 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+        
+                    <div class="space-y-4 ">
+                        {{-- Gambar --}}
+                        <div>
+                            <label for="image" class="block text-sm font-medium text-gray-900">Image:</label>
+                            <div class="mt-2">
+                                <input type="file" name="image" id="image" accept="image/*" onchange="previewImage(event)" required
+                                    class="block w-full rounded-md border border-black bg-white px-3 py-1.5 text-base text-gray-900 focus:outline-indigo-600 sm:text-sm @error('image') is-invalid @enderror">
+                                @error('image')
+                                    <p class="invalid-feedback text-red-600 text-sm">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+                        </div>
+                        <!-- Preview Image -->
+                            <div class="mt-4  min-h-[24rem] border-black rounded-md border border-dashed">
+                                <img id="preview"  class=" max-w-full rounded-md" />
+
+                                <!-- <span id="preview-placeholder" class="text-gray-400 text-sm absolute">Preview Gambar</span> -->
+                            </div>
+                        
+                        <!-- End Preview Image -->
                     </div>
                 </div>
         
@@ -146,5 +155,8 @@
         </div>
         
     </div>
+
+    <script src="{{ asset('/resources/js/preview-image.js') }}"></script>
+
 
 </x-layout-admin>

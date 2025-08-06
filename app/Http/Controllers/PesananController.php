@@ -59,8 +59,9 @@ class PesananController extends Controller
 
     public function penilaian()
     {
-        $penilaian = Rating::where('user_id', Auth::id())->get();
-        // dd($penilaian);
+        $penilaian = Rating::with(['pakaian', 'user']) // eager load relasi
+        ->where('user_id', Auth::id())
+        ->get();
         return view('user.pesanan.penilaian', compact('penilaian'));
     }
 }

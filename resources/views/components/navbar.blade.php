@@ -13,7 +13,7 @@
                         {{-- :nama-variable untuk mengirimkan properti dari component yang di panggil --}}
                         <x-nav-link href="/cart/pakaian" :active="request()->is('cart/pakaian')">Cart</x-nav-link>
                         <x-nav-link href="/pesanan" :active="request()->is(['pesanan', 'pesanan/paid', 'pesanan/delivered', 'pesanan/finished'])">My Order</x-nav-link>
-                        <x-nav-link href="/pesanan/ratings" :active="request()->is('pesanan/ratings')">Penilaian</x-nav-link>
+                        <x-nav-link href="/pesanan/ratings" :active="request()->is('pesanan/ratings')">My Ratings</x-nav-link>
                     </div>
                 </div>
             </div>

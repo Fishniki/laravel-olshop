@@ -6,31 +6,33 @@
     
         @forelse ($penilaian as $item)
             <div class="bg-white shadow-md rounded-lg p-6 mb-6 border">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-xl font-semibold text-gray-800">
-                        {{ $item->pakaian->nama ?? 'Nama pakaian tidak ditemukan' }}
-                    </h2>
-                    <div class="flex items-center space-x-1 text-yellow-400 text-lg">
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= $item->rating)
-                                ★
-                            @else
-                                ☆
-                            @endif
-                        @endfor
+                <div class="flex items-center space-x-6 mb-3">
+                    @if ($item->image)
+                        <div class="mt-4">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar Penilaian"
+                                class="w-20 h-auto rounded border">
+                        </div>
+                    @endif
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            {{ $item->pakaian->nama ?? 'Nama pakaian tidak ditemukan' }}
+                        </h2>
+                        <div class="flex items-center space-x-1 text-yellow-400 text-lg">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $item->rating)
+                                    ★
+                                @else
+                                    ☆
+                                @endif
+                            @endfor
+                        </div>
+                        @if ($item->comment)
+                            <p class="text-gray-700">{{ $item->comment }}</p>
+                        @endif
                     </div>
                 </div>
     
-                @if ($item->comment)
-                    <p class="text-gray-700 mb-3">{{ $item->comment }}</p>
-                @endif
     
-                @if ($item->image)
-                    <div class="mt-4">
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar Penilaian"
-                            class="w-40 h-auto rounded border">
-                    </div>
-                @endif
             </div>
         @empty
             <div class="text-center text-gray-600 py-10">
