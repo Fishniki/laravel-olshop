@@ -156,7 +156,9 @@
         
     </div>
 
-    <script src="{{ asset('/resources/js/preview-image.js') }}"></script>
+        <script src="{{ secure_asset('/resources/js/preview_image.js') }}"></script>
+    {{-- <script src="{{ asset('/resources/js/preview-image.js') }}"></script> --}}
+
 
 
 </x-layout-admin>

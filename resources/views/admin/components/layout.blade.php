@@ -8,8 +8,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    @vite('resources/css/app.css')
-    @vite('resources/js/preview-image.js')
+    @vite(['resources/css/app.css'])
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen">

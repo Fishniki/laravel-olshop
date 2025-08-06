@@ -88,7 +88,7 @@
     
     </x-layout>
     
-    <script src="{{ asset('resources/js/jumlah.js') }}"></script>
+    <script src="{{ secure_asset('resources/js/jumlah.js') }}"></script>
 
 </body>
 </html>

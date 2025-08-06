@@ -145,8 +145,8 @@
         </form>
     </div>
 
-    <!-- <script src="{{ secure_asset('/resources/js/script.js') }}"></script> -->
-    <script src="{{ asset('/resources/js/script.js') }}"></script>
+    {{-- <!-- <script src="{{ secure_asset('/resources/js/script.js') }}"></script> --> --}}
+    <script src="{{ secure_asset('/resources/js/script.js') }}"></script>
 
 
 </body>
