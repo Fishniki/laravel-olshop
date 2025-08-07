@@ -134,7 +134,7 @@
                             </div>
                         </div>
                         <!-- Preview Image -->
-                            <div class="mt-4  min-h-[24rem] border-black rounded-md border border-dashed">
+                            <div class="mt-4 flex justify-center items-center  min-h-[24rem] border-black rounded-md border border-dashed">
                                 <img id="preview"  class=" max-w-full rounded-md" />
 
                                 <!-- <span id="preview-placeholder" class="text-gray-400 text-sm absolute">Preview Gambar</span> -->

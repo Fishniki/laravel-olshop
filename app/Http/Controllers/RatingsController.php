@@ -43,13 +43,13 @@ class RatingsController extends Controller
         $ratings->save();
 
         //Mengupdate status pada colom order
-        $order = Order::where('user_id', Auth::id())
-        ->first();
-        // dd($order);
-        if ($order){
-            $order->status = 'Ratings';
-            $order->save();
-        }
+        // $order = Order::where('user_id', Auth::id())
+        // ->first();
+        // // dd($order);
+        // if ($order){
+        //     $order->status = 'Ratings';
+        //     $order->save();
+        // }
 
         return redirect()->route('pesanan.finished')->with('Success', 'Rating Berhasil Ditambahkan');
     }
