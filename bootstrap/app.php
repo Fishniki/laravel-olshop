@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.guests' => \App\Http\Middleware\AdminRedirect::class,
             'admin.auth' => \App\Http\Middleware\AdminAuthenticate::class,
+            'skip.ngrok' => \App\Http\Middleware\SkipNgrokWarning::class
             // 'midtrans.callback' => \App\Http\Middleware\MidtransCallback::class
         ]);
 

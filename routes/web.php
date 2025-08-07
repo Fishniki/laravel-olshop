@@ -16,17 +16,16 @@ use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RatingsController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('skip.ngrok');
 
-Route::get('/home', function () {
-    return view('welcome');
-})->middleware('verified');
+// Route::get('/home', function () {
+//     return view('welcome');
+// })->middleware('verified');
 
 
 // untuk user register dan login
