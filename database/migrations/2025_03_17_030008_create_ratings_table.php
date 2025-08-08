@@ -16,6 +16,10 @@ return new class extends Migration
             $table->integer('rating');
             $table->text('comment');
             $table->text('image');
+            $table->foreignId('order_id')->constrained(
+                table:'orders',
+                indexName:'ratings_order_id'
+            );
             $table->foreignId('user_id')->constrained(
                 table: 'users',
                 indexName: 'rating_user_id'

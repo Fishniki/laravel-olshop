@@ -49,7 +49,8 @@ class PesananController extends Controller
     {
         $finished = Order::where('user_id', Auth::id())->where('status', 'Finished')->get();
 
-        
+        // $ratings = Rating
+
         $finished->map(function ($pesanan) {
             $pakaianIds = json_decode($pesanan->pakaian_id, true);
             $pesanan->pakaians = Pakaian::whereIn('id', $pakaianIds)->get();

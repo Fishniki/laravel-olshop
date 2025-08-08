@@ -19,7 +19,6 @@ return new class extends Migration
             $table->json('pakaian_id');
             $table->bigInteger('total_order');
             $table->enum('status', ['Unpaid', 'Paid', 'Shipped', 'Delivered','Finished', 'Canceled', 'Ratings'])->default('Unpaid');
-
             $table->foreignId('alamat_id')->constrained(
                 table:'alamats',
                 indexName:'order_alamat_id'
