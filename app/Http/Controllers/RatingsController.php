@@ -32,6 +32,9 @@ class RatingsController extends Controller
             return redirect()->route('pesanan.finished')->withErrors(['image' => 'File tidak ditemukan']);
         }
 
+
+        $order = Order::where('user_id', Auth::id())->get();
+        
         
 
         $ratings = new Rating();
@@ -40,16 +43,8 @@ class RatingsController extends Controller
         $ratings->product_id = $request->pakaian_id;
         $ratings->comment = $request->ulasan;
         $ratings->image = $item_image;
+        $ratings->order_id =  $order->order_id;
         $ratings->save();
-
-        //Mengupdate status pada colom order
-        // $order = Order::where('user_id', Auth::id())
-        // ->first();
-        // // dd($order);
-        // if ($order){
-        //     $order->status = 'Ratings';
-        //     $order->save();
-        // }
 
         return redirect()->route('pesanan.finished')->with('Success', 'Rating Berhasil Ditambahkan');
     }
