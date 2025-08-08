@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained(
                 table:'orders',
                 indexName:'ratings_order_id'
-            );
+            )->onDelete('cascade');
             $table->foreignId('user_id')->constrained(
                 table: 'users',
                 indexName: 'rating_user_id'

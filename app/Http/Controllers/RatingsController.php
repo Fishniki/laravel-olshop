@@ -33,7 +33,8 @@ class RatingsController extends Controller
         }
 
 
-        $order = Order::where('user_id', Auth::id())->get();
+        $order = Order::where('user_id', Auth::id())->first();    
+        // dd($order->order_id);
         
         
 
