@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class PesananController extends Controller
 {
-    public function unpaid() {
+    public function unpaid()
+    {
         $pesanans = Order::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->get();
         $pesanans->map(function ($pesanan) {
-           $pakaianIds = json_decode($pesanan->pakaian_id, true);
-           $pesanan->pakaian = Pakaian::whereIn('id', $pakaianIds)->get();
-           
-        return $pesanan;
+            $pakaianIds = json_decode($pesanan->pakaian_id, true);
+            $pesanan->pakaian = Pakaian::whereIn('id', $pakaianIds)->get();
+
+            return $pesanan;
         });
 
         // if ($pesanans->isEmpty()) {
@@ -47,23 +48,39 @@ class PesananController extends Controller
 
     public function finished()
     {
-        $finished = Order::where('user_id', Auth::id())->where('status', 'Finished')->get();
-
-        // $ratings = Rating
+        $finished = Order::where('user_id', Auth::id())
+            ->where('status', 'Finished')
+            ->get();
 
         $finished->map(function ($pesanan) {
             $pakaianIds = json_decode($pesanan->pakaian_id, true);
-            $pesanan->pakaians = Pakaian::whereIn('id', $pakaianIds)->get();
+
+            // Ambil ID pakaian yang sudah dirating oleh user ini untuk order ini
+            $ratedProductIds = Rating::where('user_id', Auth::id())
+                ->where('order_id', $pesanan->order_id) // UUID
+                ->pluck('product_id')
+                ->toArray();
+
+            // Filter pakaian yang belum diberi rating
+            $pakaianBelumRated = array_diff($pakaianIds, $ratedProductIds);
+
+            $pesanan->pakaians = Pakaian::whereIn('id', $pakaianBelumRated)->get();
+        });
+
+        // Hanya tampilkan pesanan yang masih ada pakaian belum rated
+        $finished = $finished->filter(function ($pesanan) {
+            return $pesanan->pakaians->isNotEmpty();
         });
 
         return view('user.pesanan.finish', compact('finished'));
     }
 
+
     public function penilaian()
     {
         $penilaian = Rating::with(['pakaian', 'user']) // eager load relasi
-        ->where('user_id', Auth::id())
-        ->get();
+            ->where('user_id', Auth::id())
+            ->get();
         return view('user.pesanan.penilaian', compact('penilaian'));
     }
 }

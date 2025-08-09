@@ -15,4 +15,14 @@ class Rating extends Model
     {
         return $this->belongsTo(Pakaian::class, 'product_id');
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Rating::class, 'parent_id');    
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Rating::class, 'parent_id');
+    }
 }

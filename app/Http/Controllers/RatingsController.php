@@ -34,10 +34,7 @@ class RatingsController extends Controller
 
 
         $order = Order::where('user_id', Auth::id())->first();    
-        // dd($order->order_id);
-        
-        
-
+    
         $ratings = new Rating();
         $ratings->user_id = Auth::id();
         $ratings->rating = $request->rating;
@@ -49,16 +46,4 @@ class RatingsController extends Controller
 
         return redirect()->route('pesanan.finished')->with('Success', 'Rating Berhasil Ditambahkan');
     }
-
-    // public function tambahRate(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //         'rating' => 'required|integer',
-    //     ]);
-
-    //     if ($validator->passes()){
-    //         return redirect()->route('')
-    //     }
-    // }
 }

@@ -27,7 +27,7 @@
                     </div>
 
                     {{-- Aksi --}}
-                    <div class="flex flex-col items-center gap-2">
+                    <div class="flex items-center gap-2">
                         <a href="{{ route('edit-pakaian', ['id' => $product->id]) }}"
                             class="p-2 bg-green-600 text-white rounded hover:bg-green-500">
                             <i class="bi bi-pencil"></i>
@@ -35,6 +35,13 @@
                         <a href="{{ route('delete-pakaian', ['id' => $product->id]) }}"
                             class="p-2 bg-red-600 text-white rounded hover:bg-red-500">
                             <i class="bi bi-trash3"></i>
+                        </a>
+                        <a href="{{ route('detail-produk-admin', ['id' => $product->id]) }}">
+                            <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 
+                            focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 
+                            hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 
+                            dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white 
+                            dark:hover:bg-gray-700">Detail</button>
                         </a>
                     </div>
                 </div>

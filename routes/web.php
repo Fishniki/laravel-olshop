@@ -74,6 +74,9 @@ Route::group(['middleware' => 'admin.auth'], function () {
 
     Route::get('detail/pesanan/{id}', [TablePesanan::class, 'detailpesanan'])->name('detail-pesanan');
     Route::put('detail/update/status{id}', [TablePesanan::class, 'updateStatus'])->name('update-status');
+    Route::get('detail/produk-admin/{id}', [TableProduk::class, 'show'])->name('detail-produk-admin');
+
+    Route::post('ratings/reply', [TableProduk::class, 'reply'])->name('admin.ratings.reply');
 });
 
 Route::get('/cart/pakaian', [CartController::class, 'index'])->name('cart');
