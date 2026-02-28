@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::table('ratings', function (Blueprint $table) {
-            // 1. Drop foreign key lama
-            $table->dropForeign('ratings_order_id');
-        });
+        //  Schema::table('ratings', function (Blueprint $table) {
+        //     // 1. Drop foreign key lama
+        //     $table->dropForeign('ratings_order_id');
+        // });
 
         // 2. Ubah tipe kolom ke char(36) agar sama dengan orders.order_id
         Schema::table('ratings', function (Blueprint $table) {
-            $table->char('order_id', 36)->change();
+            // $table->char('order_id', 36)->change();
+            $table->uuid('order_id')->change();
         });
 
         // 3. Tambah foreign key baru

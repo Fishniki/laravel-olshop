@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
+            $table->uuid('order_id');
             $table->integer('rating');
             $table->text('comment');
             $table->text('image');
